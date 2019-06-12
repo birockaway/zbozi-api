@@ -6,19 +6,23 @@ import pandas as pd
 import json
 import os
 from keboola import docker # pro komunikaci s parametrama a input/output mapping
-
 import warnings
+
+# Parameters
+data_folder = '/data/'
+
+
 warnings.filterwarnings("ignore", message="numpy.dtype size changed")
 
 print("Python libraries loaded.")
 
-print("Current Working Directory is ... "+os.getcwd())
-print("Config taken from ... "+os.path.abspath(os.path.join(os.getcwd(), os.pardir))+'data/')
+print(f"Current Working Directory is ... {os.getcwd()}")
+print(f"Config taken from ... {data_folder}")
 
 
 
 # # initialize KBC configuration
-cfg = docker.Config(os.path.abspath(os.path.join(os.getcwd(), os.pardir))+'data/')
+cfg = docker.Config(data_folder)
 parameters = cfg.get_parameters()
 
 
@@ -112,4 +116,4 @@ if __name__ == '__main__':
         df = pd.concat([df, daily_df])
         time.sleep(23)
 
-    df.to_csv('/data/out/tables/final.csv', index=False)
+    df.to_csv(f'{data_folder}out/tables/final.csv', index=False)
