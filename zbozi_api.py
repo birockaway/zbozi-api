@@ -26,7 +26,6 @@ cfg = docker.Config(data_folder)
 parameters = cfg.get_parameters()
 
 
-
 def unix_times(start, end):
     dates = list(pd.date_range(start=start, end=end, freq='D'))
     # print(dates)
@@ -112,7 +111,7 @@ if __name__ == '__main__':
         daily_df['date'] = date_
         daily_df['eshop_name'] = shop_name
         daily_df = daily_df[['id_polozky', 'jmeno_polozky', 'zobrazeni', 'prokliky',
-                             'celkova_cena_za_prokliky', 'pocet_konverzi', 'date']]
+                             'celkova_cena_za_prokliky', 'pocet_konverzi', 'date','eshop_name']]
         df = pd.concat([df, daily_df])
         time.sleep(23)
 
