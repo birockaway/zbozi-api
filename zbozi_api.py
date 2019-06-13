@@ -57,7 +57,7 @@ if __name__ == '__main__':
                    'last_3_days': date.today() - timedelta(3),
                    'last_week': date.today() - timedelta(7),
                    'last_31_days': date.today() - timedelta(31),
-                   'last_year': date.today() - timedelta(365),
+                   'last_50_days': date.today() - timedelta(50),
                    'SPECIFIC_DATE': datetime.strptime(default_start, '%Y-%m-%d')}
 
     start_date = start_dates.get(date_preset, None)
@@ -77,6 +77,8 @@ if __name__ == '__main__':
 
     for date_from in unix_dates[1:]:
         date_from, date_to = date_to, date_from
+
+        time.sleep(4)
 
         req_id_response = requests.post(
             f"https://api.zbozi.cz/v1/shop/statistics/item?timestampFrom={date_from}&timestampTo={date_to}&dataFormat=csv",
