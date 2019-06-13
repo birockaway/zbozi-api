@@ -57,12 +57,13 @@ if __name__ == '__main__':
                    'last_3_days': date.today() - timedelta(3),
                    'last_week': date.today() - timedelta(7),
                    'last_31_days': date.today() - timedelta(31),
-                   'last_year': date.today() - timedelta(365)}
+                   'last_year': date.today() - timedelta(365),
+                   'SPECIFIC_DATE': datetime.strptime(default_start, '%Y-%m-%d')}
 
     start_date = start_dates.get(date_preset, None)
     end_date = date.today() - timedelta(1)
 
-    if start_date is None:
+    if date_preset =='SPECIFIC_DATE':
         start_date, end_date = validate(default_start), validate(default_end)
         start_date, end_date = default_start, default_end
 
