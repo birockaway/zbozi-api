@@ -62,7 +62,7 @@ if __name__ == '__main__':
     start_date = start_dates.get(date_preset, None)
     end_date = date.today() - timedelta(1)
 
-    if start_date is None:
+    if start_date == 'SPECIFIC_DATE':
         start_date, end_date = validate(default_start), validate(default_end)
         start_date, end_date = default_start, default_end
 
