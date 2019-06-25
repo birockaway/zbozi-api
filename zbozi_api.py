@@ -116,6 +116,6 @@ if __name__ == '__main__':
         daily_df = daily_df[['id_polozky', 'jmeno_polozky', 'zobrazeni', 'prokliky',
                              'celkova_cena_za_prokliky', 'pocet_konverzi', 'date','eshop_name']]
         df = pd.concat([df, daily_df])
-        time.sleep(23)
+        time.sleep(60)
 
     df.to_csv(f'{data_folder}out/tables/final.csv', index=False)
