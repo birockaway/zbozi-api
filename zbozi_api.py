@@ -55,9 +55,10 @@ if __name__ == '__main__':
 
     start_dates = {'Yesterday': date.today() - timedelta(1),
                    'last_3_days': date.today() - timedelta(3),
-                   'last_week': date.today() - timedelta(7),
-                   'last_31_days': date.today() - timedelta(31),
-                   'last_50_days': date.today() - timedelta(50),
+                   'last_5_days': date.today() - timedelta(5),
+                   # 'last_week': date.today() - timedelta(7),
+                   # 'last_31_days': date.today() - timedelta(31),
+                   # 'last_50_days': date.today() - timedelta(50),
                    'SPECIFIC_DATE': datetime.strptime(default_start, '%Y-%m-%d')}
 
     start_date = start_dates.get(date_preset, None)
