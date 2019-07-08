@@ -52,6 +52,8 @@ if __name__ == '__main__':
     default_start = parameters.get('Date_from')
     default_end = parameters.get('Date_to')
 
+    datetime.strptime(default_start, '%Y-%m-%d'))
+
 
     start_dates = {'Yesterday': date.today() - timedelta(1),
                    'last_3_days': date.today() - timedelta(3),
@@ -62,7 +64,9 @@ if __name__ == '__main__':
                    'SPECIFIC_DATE': datetime.strptime(default_start, '%Y-%m-%d')}
 
     start_date = start_dates.get(date_preset, None)
+    print("Start date: " + str(start_date))
     end_date = date.today() - timedelta(1)
+    print("End date: " + str(end_date))
 
     if date_preset =='SPECIFIC_DATE':
         start_date, end_date = validate(default_start), validate(default_end)
@@ -78,6 +82,7 @@ if __name__ == '__main__':
 
     for date_from in unix_dates[1:]:
         date_from, date_to = date_to, date_from
+        print("Unix start and end date: "+ date_from, date_to)
 
         time.sleep(4)
 
