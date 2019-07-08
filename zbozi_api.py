@@ -52,7 +52,7 @@ if __name__ == '__main__':
     default_start = parameters.get('Date_from')
     default_end = parameters.get('Date_to')
 
-    datetime.strptime(default_start, '%Y-%m-%d'))
+    print(datetime.strptime(default_start, '%Y-%m-%d'))
 
 
     start_dates = {'Yesterday': date.today() - timedelta(1),
