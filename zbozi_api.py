@@ -7,6 +7,7 @@ import json
 import os
 from keboola import docker # pro komunikaci s parametrama a input/output mapping
 import warnings
+import arrow
 
 # Parameters
 data_folder = '/data/'
@@ -67,6 +68,11 @@ if __name__ == '__main__':
     print("Start date: " + str(start_date))
     end_date = date.today() - timedelta(1)
     print("End date: " + str(end_date))
+
+    delta = arrow.get(default_end) - arrow.get(default_start)
+
+    if date_preset == 'SPECIFIC_DATE' and delta.days > 5:
+        raise ValueError(f"Date range from {default_end} and {default_start} is more than 5 days, please reduce it.")
 
     if date_preset =='SPECIFIC_DATE':
         start_date, end_date = validate(default_start), validate(default_end)
