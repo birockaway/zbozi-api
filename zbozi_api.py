@@ -103,6 +103,7 @@ if __name__ == '__main__':
 
     for date_, request_id in zip(dates, request_ids):
         stats = requests.get(f"https://api.zbozi.cz/v1/shop/statistics/item/csv?requestId={request_id}", auth=auth_tuple)
+        time.sleep(15)
         stats.encoding = 'utf-8'
         io_data = StringIO(stats.text)
         daily_df = pd.read_csv(io_data, sep=";")
