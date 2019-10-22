@@ -95,6 +95,7 @@ if __name__ == '__main__':
         req_id_response = requests.post(
             f"https://api.zbozi.cz/v1/shop/statistics/item?timestampFrom={date_from}&timestampTo={date_to}&dataFormat=csv",
             auth=auth_tuple)
+        print(req_id_response.text)
         request_id = json.loads(req_id_response.text)['data']['requestId']
         request_ids.append(request_id)
 
