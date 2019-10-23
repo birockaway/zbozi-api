@@ -102,7 +102,7 @@ if __name__ == '__main__':
     print(f"Request id's' are: {request_ids}")
 
     if login == '580': # Mall.cz
-        time.sleep(600)
+        time.sleep(900)
     else:
         time.sleep(400)
 
