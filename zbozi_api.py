@@ -104,7 +104,7 @@ if __name__ == '__main__':
     if login == '580': # Mall.cz
         time.sleep(900)
     else:
-        time.sleep(400)
+        time.sleep(500)
 
     for date_, request_id in zip(dates, request_ids):
         stats = requests.get(f"https://api.zbozi.cz/v1/shop/statistics/item/csv?requestId={request_id}", auth=auth_tuple)
