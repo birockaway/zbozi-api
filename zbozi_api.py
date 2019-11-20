@@ -138,6 +138,6 @@ if __name__ == '__main__':
         time.sleep(60)
 
 
-    df['id_polozky'] = df['id_polozky'].str.replace('.0','', regex=False)
+    df['id_polozky'] = df['id_polozky'].astype(str).str.replace('.0','', regex=False)
     time.sleep(5)    
     df.to_csv(f'{data_folder}out/tables/final.csv', index=False)
