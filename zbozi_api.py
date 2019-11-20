@@ -135,7 +135,9 @@ if __name__ == '__main__':
         daily_df = daily_df[['id_polozky', 'jmeno_polozky', 'zobrazeni', 'prokliky',
                              'celkova_cena_za_prokliky', 'pocet_konverzi', 'date','eshop_name']]
         df = pd.concat([df, daily_df])
-        df['id_polozky'].replace('.0', '', inplace=True)
         time.sleep(60)
-        
+
+
+    df['id_polozky'].replace('.0', '', inplace=True)
+    time.sleep(5)    
     df.to_csv(f'{data_folder}out/tables/final.csv', index=False)
