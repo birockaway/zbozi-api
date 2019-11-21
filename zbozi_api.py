@@ -21,12 +21,11 @@ print(f"Current Working Directory is ... {os.getcwd()}")
 print(f"Config taken from ... {data_folder}")
 
 
-
 # # initialize KBC configuration
 cfg = docker.Config(data_folder)
 parameters = cfg.get_parameters()
 
-
+# Get unix time of start and end date
 def unix_times(start, end):
     dates = list(pd.date_range(start=start, end=end, freq='D'))
     # print(dates)
@@ -37,6 +36,7 @@ def unix_times(start, end):
     unix_dates = list(map(str, map(int, map(time.mktime, date_timetuples))))
     return dates, unix_dates
 
+# Check format of date
 def validate(date_text):
     try:
         datetime.strptime(date_text, '%Y-%m-%d')
@@ -59,9 +59,6 @@ if __name__ == '__main__':
     start_dates = {'Yesterday': date.today() - timedelta(1),
                    'last_3_days': date.today() - timedelta(3),
                    'last_5_days': date.today() - timedelta(5),
-                   # 'last_week': date.today() - timedelta(7),
-                   # 'last_31_days': date.today() - timedelta(31),
-                   # 'last_50_days': date.today() - timedelta(50),
                    'SPECIFIC_DATE': datetime.strptime(default_start, '%Y-%m-%d')}
 
     start_date = start_dates.get(date_preset, None)
@@ -103,11 +100,7 @@ if __name__ == '__main__':
 
     time.sleep(900)
 
-    #if login == '580': # Mall.cz
-    #    time.sleep(900)
-    #else:
-    #    time.sleep(900)
-
+    # Building dataframe and summing up the views, clicks, conversions and costs by date and id_polozky
     for date_, request_id in zip(dates, request_ids):
         stats = requests.get(f"https://api.zbozi.cz/v1/shop/statistics/item/csv?requestId={request_id}", auth=auth_tuple)
         stats.encoding = 'utf-8'
@@ -137,7 +130,7 @@ if __name__ == '__main__':
         df = pd.concat([df, daily_df])
         time.sleep(60)
 
-
+    # Remove '.0' at the end of id_polozky and saving to the table in keboola
     df['id_polozky'] = df['id_polozky'].astype(str).str.replace('.0','', regex=False)
     time.sleep(5)    
     df.to_csv(f'{data_folder}out/tables/final.csv', index=False)
